@@ -21,11 +21,12 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
 //                startActivity(intent);
-                Intent intent = new Intent("android.intent.action.ACTION_START");
+                startActivityForResult(intent,1);
+                /*Intent intent = new Intent("android.intent.action.ACTION_START");
                 intent.addCategory("android.intent.category.MY_CATEGORY");
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
     }
@@ -35,6 +36,12 @@ public class FirstActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * 菜单功能
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -49,4 +56,23 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * 重写方法，来获取返回的数据
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK){
+                    String returnedData = data.getStringExtra("return_data");
+                    Log.d(TAG, "onActivityResult: "+returnedData);
+                    Toast.makeText(this,returnedData,Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+        }
+    }
 }
