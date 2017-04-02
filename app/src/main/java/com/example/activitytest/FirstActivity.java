@@ -66,7 +66,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode){
             case 1:
-                if(resultCode==RESULT_OK){
+                if(resultCode==RESULT_OK){//github test
                     String returnedData = data.getStringExtra("return_data");
                     Log.d(TAG, "onActivityResult: "+returnedData);
                     Toast.makeText(this,returnedData,Toast.LENGTH_SHORT).show();
